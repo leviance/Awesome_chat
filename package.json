@@ -1,0 +1,22 @@
+{
+  "name": "awesome_chat",
+  "version": "1.0.0",
+  "description": "write hello world",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drdung1999/Awesome_chat.git"
+  },
+  "author": "Hoang Dung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drdung1999/Awesome_chat/issues"
+  },
+  "homepage": "https://github.com/drdung1999/Awesome_chat#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
