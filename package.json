@@ -18,10 +18,13 @@
   },
   "homepage": "https://github.com/drdung1999/Awesome_chat#readme",
   "dependencies": {
+    "babel-node": "0.0.1-security",
     "bluebird": "^3.5.3",
+    "body-parser": "^1.18.2",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-ejs-extend": "0.0.1",
+    "express-validator": "^4.3.0",
     "mongoose": "^4.13.9"
   },
   "devDependencies": {
