@@ -1,4 +1,4 @@
-import mongoose from ('mongoose');
+import mongoose from 'mongoose';
 let Schema = mongoose.Schema;
 
 let usreSchema = new Schema({
@@ -28,5 +28,15 @@ let usreSchema = new Schema({
   updatedAt : {type :Number , default : null},
   removedAt : {type :Number , default : null}
 });
+
+usreSchema.statics = {
+  createNew(item) {
+    return this.create(item);
+  }, 
+  findbyemail(email) {
+    return this.findOne({'local.email' : email}).exec();
+  }
+}
+
 
 module.exports = mongoose.model('user',usreSchema);

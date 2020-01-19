@@ -25,16 +25,18 @@ function showRegisterForm() {
     $('.error').removeClass('alert alert-danger').html('');
   }
   
-  function openLoginModal() {
-    showLoginForm();
+  function openLoginModal() {  
     setTimeout(function() {
       $('#loginModal').modal('show');
+      showLoginForm();
     }, 230);
+    
   }
   
   function openRegisterModal() {
-    showRegisterForm();
     setTimeout(function() {
       $('#loginModal').modal('show');
+      showRegisterForm();
     }, 230);
+    
   }
