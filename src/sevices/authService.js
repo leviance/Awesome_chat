@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import uuid from 'uuid/v4';
 import {transError, transSuccess, transmail} from '../../lang/vi';
 import sendMail from '../config/mailler';
+import { auth } from '.';
 
 let saultRounds = 7;
 
@@ -36,11 +37,30 @@ let register = (email,gender,password, protocol, host) =>{
   let user = await Usermodel.createNew(userItem);
   let linkVeryfy = protocol + '://' + host + '/verify/' + user.local.verifytoken;
 
-  // sendMail(email, transmail.subject, transmail.template(linkVeryfy));
-  resolve(transSuccess.userCreated(user.local.email)); 
+  sendMail(email, transmail.subject, transmail.template(linkVeryfy))
+    .then(success =>{
+      resolve(transSuccess.userCreated(user.local.email)); 
+    })
+    .catch( async (error) =>{
+      await Usermodel.removeById(user._id);
+      console.log(error);
+      reject(transmail.send_fail);
+    });
   });
 };
 
+let verifyAccount = (token) => {
+  return new Promise( async (resolve, reject) =>{
+    let userByToken = await Usermodel.verifytoken(token);
+    if(!userByToken){
+      return reject(transError.token_undifined);
+    }
+    await Usermodel.verify(token);
+    resolve(transSuccess.account_acctive);
+  });
+}
+
 module.exports = {
-  register : register
+  register : register,
+  verifyAccount : verifyAccount
 };
