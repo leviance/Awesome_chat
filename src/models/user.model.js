@@ -35,6 +35,9 @@ usreSchema.statics = {
   }, 
   findbyemail(email) {
     return this.findOne({'local.email' : email}).exec();
+  },
+  removeById(id) {
+    return this.findByIdAndRemove(id).exec();
   }
 }
 

@@ -9,4 +9,8 @@
   export APP_host=***
   export APP_port=***
 
-  
+  # config admin email account
+  export MAIL_USER=***
+  export MAIL_PASSWORD=***
+  export MAIL_HOST=***
+  export MAIL_PORT=***
