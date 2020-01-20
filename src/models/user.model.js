@@ -38,6 +38,12 @@ usreSchema.statics = {
   },
   removeById(id) {
     return this.findByIdAndRemove(id).exec();
+  },
+  verify(token) {
+    return this.findOneAndUpdate(
+      {'local.verifytoken':token},
+      {'local.isActive' : true,'local.verifytoken': null}
+    ).exec();
   }
 }
 

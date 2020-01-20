@@ -9,6 +9,7 @@ let initRoutes = (app) =>{
   
   router.get('/login-register',auth.loginRegister);
   router.post('/register',validator.register,auth.postRegister);
+  router.get('/verify/:token',auth.verifyAccount);
 
   return app.use('/',router);
 

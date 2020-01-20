@@ -14,13 +14,14 @@ export const transError = {
 export const transSuccess = {
   userCreated : (userEmail) =>{
     return 'tài khoản ' + userEmail + ' đã được tạo, vui lòng kiểm tra lại email của bạn để acctive tài khoản trước khi đăng nhập !, xin cảm ơn .'
-  }
+  },
+  account_actived : "kích hoạt tài khoản thành công"
 }
 
 export const transmail = {
   subject: 'Real Live chat xác thực kích hoạt tài khoản',
   template : (linkVeryfy) =>{
-    return '<h2>Bạn nhận được mail này vĩ đã đăng ký tài khoản trên Real Live Chat </h2> <h3>Vui lòng kích vào liên kết bên dưới để kích hoạt tài khoản</h3> </h3><a href="'+ linkVeryfy +' target="blank">'+linkVeryfy+'</a></h3> <h4>Nếu email này là nhầm lẫn hãy bỏ qua nó</h4>'
+    return '<h2>Bạn nhận được mail này vĩ đã đăng ký tài khoản trên Real Live Chat </h2> <h3>Vui lòng kích vào liên kết bên dưới để kích hoạt tài khoản</h3> </h3><a href="'+ linkVeryfy +'" target="blank">'+linkVeryfy+'</a></h3> <h4>Nếu email này là nhầm lẫn hãy bỏ qua nó</h4>'
   },
   send_fail: 'có lỗi trong quá trình gửi mail vui lòng liên hệ bộ phận hỗ trợ của chúng tôi'
 }
