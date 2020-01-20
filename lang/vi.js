@@ -13,6 +13,6 @@ export const transError = {
 
 export const transSuccess = {
   userCreated : (userEmail) =>{
-    return 'tài khoản <strong>' + userEmail + '</strong> đã được tạo, vui lòng kiểm tra lại email của bạn để acctive tài khoản trước khi đăng nhập !, xin cảm ơn .'
+    return 'tài khoản ' + userEmail + ' đã được tạo, vui lòng kiểm tra lại email của bạn để acctive tài khoản trước khi đăng nhập !, xin cảm ơn .'
   }
 }
