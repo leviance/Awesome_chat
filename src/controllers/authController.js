@@ -31,10 +31,26 @@ let postRegister = async (req,res) =>{
     req.flash('errors', errorsArr);
     return res.redirect('/login-register');
   }
+};
 
+let verifyAccount = async (req,res) => {
+  let errorsArr = [];
+  let successArr = [];
+
+  try {
+    let verifySuccess = await auth.verifyAccount(req.params.token);
+    successArr.push(verifySuccess);
+    req.flash('success',successArr);
+    return res.redirect('/login-register');
+  } catch (error) {
+    errorsArr.push(error);
+    req.flash('errors', errorsArr);
+    return res.redirect('/login-register');
+  }
 };
 
 module.exports = {
   loginRegister : loginRegister,
-  postRegister : postRegister
+  postRegister : postRegister,
+  verifyAccount : verifyAccount
 }
