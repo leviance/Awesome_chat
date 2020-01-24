@@ -32,7 +32,9 @@
     "mongoose": "^4.13.9",
     "nodemailer": "^4.4.2",
     "passport": "^0.4.1",
+    "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
+    "pem": "^1.13.2",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
