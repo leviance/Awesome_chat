@@ -19,3 +19,8 @@
   export FB_APP_ID=***
   export FB_APP_SECRET=***
   export FB_CALLBACK_URL=***
+
+  # config google login app
+  export GG_APP_ID=***
+  export GG_APP_SECRET=***
+  export GG_CALLBACK_URL=***
