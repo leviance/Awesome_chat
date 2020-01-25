@@ -66,7 +66,6 @@ $(document).ready(function() {
   updateUerInfo();
 
   originAvatarSrc = $('#user-modal-avatar').attr('src')
-  console.log('dia chi cua anh la : ' + originAvatarSrc);
   $('#input-btn-update-user').bind('click', function(){
     if($.isEmptyObject(userInfo) && !userAvatar){
       alertify.notify('bạn phải thay đổi thông tin trước khi cập nhập dữ liệu', "error" , 7);
@@ -80,18 +79,24 @@ $(document).ready(function() {
       processData: false,
       data: userAvatar,
       success: function(result) {
-        //
+      $(".user-modal-alert-success").find("span").text(result.message);
+      $(".user-modal-alert-success").css("display","block");
+      $('#navbar-avatar').attr('src',result.imgageSrc);
+      originAvatarSrc = result.imgageSrc;
+      $('#input-btn-cancel-update-user').click();
       },
       error: function(error) {
-        //
+        $(".user-modal-alert-error").find("span").text(error.responseText);
+        $(".user-modal-alert-error").css("display","block");
+
+        $('#input-btn-cancel-update-user').click();
       }
     })
-    console.log(userAvatar);
-    console.log(userInfo);
   });
   $('#input-btn-cancel-update-user').bind('click', function(){
     userAvatar = null;
     userInfo = {};
+    $('#input-change-avatar').val(null);
     $('#user-modal-avatar').attr("src",originAvatarSrc);
   });
 });

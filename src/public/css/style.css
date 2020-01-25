@@ -1275,3 +1275,7 @@ label:focus,
 #user-profile-modal input:hover, #user-profile-modal input:focus {
   border-color: #576574
 }
+
+.user-modal-alert-success, .user-modal-alert-error {
+  display: none;
+}
