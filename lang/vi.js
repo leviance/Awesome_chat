@@ -10,7 +10,9 @@ export const transError = {
   account_removed : "tài khoản này đã bị gỡ khỏi hệ thống nếu tin rằng điều này là hiểu nhầm vui lòng liên hệ lại với bộ phận kỹ thuật của chúng tôi !",
   account_not_active : "email đã được tạo nhưng chưa được acctive vui lòng kiểm tra email để  acctive tài khoản hoặc liên hệ với kỹ thuật viên của chúng tôi !",
   loginFalse: "sai tài khoản hoặc mật khẩu",
-  server_error: "Có lỗi ở phía server, vui lòng liên hệ với bộ phận hỗ trợ của chúng tôi để báo cáo lỗi này xin cảm ơn"
+  server_error: "Có lỗi ở phía server, vui lòng liên hệ với bộ phận hỗ trợ của chúng tôi để báo cáo lỗi này xin cảm ơn",
+  avatar_type : "kiểu file không hợp lệ",
+  avatar_size : "file quá lớn để upload tối đa là 10MB"
 };
 
 export const transSuccess = {
@@ -21,7 +23,8 @@ export const transSuccess = {
   loginSuccess : (username) =>{
     return 'Xin chào ' + username + ' chúc bạn một ngày tốt lành'
   },
-  logout_success: "Đăng xuất tài khoản thành công"
+  logout_success: "Đăng xuất tài khoản thành công",
+  avatar_updated : "Cập nhật ảnh đại diện thành công."
 }
 
 export const transmail = {
