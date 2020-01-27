@@ -11,10 +11,11 @@ function callFindUsers(element){
       alertify.notify(" Tên người dùng không được chứa ký tự đặc biệt !!! ","error",7);
       return false;
     }
-    console.log(keyWord);
-    console.log('/contact/find-users/' + keyWord);
+
     $.get('/contact/find-users/' + keyWord , function(data) {
       $("#find-user ul").html(data); 
+      addContact(); // js/adaContact.js
+      removeRequestContact(); // js/removeRequestContact.js
     });
   }
 }
