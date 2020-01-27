@@ -78,7 +78,35 @@ let updateInfor = async (req,res) =>{
   }
 }
 
+let updatePassword = async (req, res) => {
+  let errorsArr = [] ; 
+
+  if(!validationResult(req).isEmpty()){
+   let validatorError = Object.values(validationResult(req).mapped());
+
+    validatorError.forEach(validatorError => {
+      errorsArr.push(validatorError.msg);
+    });
+    return res.status(500).send(errorsArr);
+  }
+
+  try {
+    let updateUserItem = req.body;
+
+    await user.updatePassword(req.user._id,updateUserItem);
+
+    let result = {
+      message : transSuccess.user_password
+    };
+    return res.status(200).send(result);
+
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+}
+
 module.exports = { 
   upDateAvatar : upDateAvatar,
-  updateInfor : updateInfor
+  updateInfor : updateInfor,
+  updatePassword : updatePassword
 };

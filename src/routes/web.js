@@ -40,8 +40,8 @@ let initRoutes = (app) =>{
   router.get('/logout',auth.checkLoggedIn ,auth.getLogout);
   router.put('/user/update-avatar',auth.checkLoggedIn , user.upDateAvatar );
   router.put('/user/update-infor',auth.checkLoggedIn , userValid.updateInfor ,user.updateInfor );
+  router.put('/user/update-password',auth.checkLoggedIn, userValid.updatePassword ,user.updatePassword);
   
-
   return app.use('/',router);
 
 }
