@@ -1,7 +1,8 @@
 import express from 'express';
-import {home,auth,user} from '../controllers/index';
+import {home,auth,user,contact} from '../controllers/index';
 import validator from '../validation/authValidation';
 import userValid from '../validation/userValidation';
+import contactValid from '../validation/contactValidation';
 import passport from 'passport';
 import initPassportLocal from '../controllers/passportController/local';
 import initPassportFacebook from '../controllers/passportController/facebook';
@@ -41,7 +42,8 @@ let initRoutes = (app) =>{
   router.put('/user/update-avatar',auth.checkLoggedIn , user.upDateAvatar );
   router.put('/user/update-infor',auth.checkLoggedIn , userValid.updateInfor ,user.updateInfor );
   router.put('/user/update-password',auth.checkLoggedIn, userValid.updatePassword ,user.updatePassword);
-  
+  router.get('/contact/find-users/:keyWord',auth.checkLoggedIn, contactValid.findUserContact , contact.finndUsersContact);
+ 
   return app.use('/',router);
 
 }
