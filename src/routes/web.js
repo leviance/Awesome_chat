@@ -39,11 +39,14 @@ let initRoutes = (app) =>{
 
   router.get('/',auth.checkLoggedIn ,home);
   router.get('/logout',auth.checkLoggedIn ,auth.getLogout);
+
   router.put('/user/update-avatar',auth.checkLoggedIn , user.upDateAvatar );
   router.put('/user/update-infor',auth.checkLoggedIn , userValid.updateInfor ,user.updateInfor );
   router.put('/user/update-password',auth.checkLoggedIn, userValid.updatePassword ,user.updatePassword);
+
   router.get('/contact/find-users/:keyWord',auth.checkLoggedIn, contactValid.findUserContact , contact.finndUsersContact);
- 
+  router.post('/contact/add-new',auth.checkLoggedIn, contact.addNew);
+  router.delete('/contact/remove-request-contact',auth.checkLoggedIn, contact.removeRequestContact);
   return app.use('/',router);
 
 }
