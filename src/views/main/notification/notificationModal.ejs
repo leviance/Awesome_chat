@@ -1,0 +1,26 @@
+<div class="modal fade" id="notificationModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">All Attachs in this conversation.</h4>
+          </div>
+          <div class="modal-body">
+              <div class="mark-notif-as-read">
+                <a href="javascript:void(0)" id="modal-mark-notif-as-read"><strong>Đánh dấu tất cả là đã đọc</strong></a>
+              </div>
+              <ul class="list-notifications">
+                <% notifications.forEach(function(notification){ %>
+                  <li>
+                    <%- notification %>
+                  </li>
+                <% }); %> 
+                  
+              </ul>
+              <div class="read-more-notif">
+                <a href="javascript:void(0)" id="link-read-more-notif"><strong>Xem thêm</strong></a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

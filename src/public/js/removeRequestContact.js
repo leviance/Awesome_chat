@@ -18,9 +18,10 @@ function removeRequestContact () {
 }
 
 socket.on("response-remove-request-contact",function(user){
-  $('.noti_content').find('span[data-uid ='+ user.id +']').remove();
+  $('.noti_content').find('div[data-uid ='+ user.id +']').remove();
+  $("ul.list-notifications").find('li>div[data-uid ='+ user.id +']').parent().remove();
 
-  // xoa o model tab yeu cau ket ban
+  // xoa o modal tab yeu cau ket ban
 
   decreaseNumberNotiContact(className = "count-request-contact-received");
   decreaseNumberNotification(className = "noti_contact_counter");
