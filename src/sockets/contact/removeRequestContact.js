@@ -2,30 +2,26 @@ import {pushSocketIdToArray,emitNotifyToArray,removeSocketIdFromArray} from '../
 
 
 // io form socket.io
-
-let addNewContact = (io) =>{ 
+let removeRequestContact = (io) =>{ 
   let clients = {};
   io.on('connection',(socket) =>{
     clients = pushSocketIdToArray(clients,socket.request.user._doc._id,socket.id);
 
-    socket.on("add-new-contact",(data) =>{ 
+    socket.on("remove-request-contact",(data) =>{ 
       let currentUser = {
-        id: socket.request.user._doc._id,
-        username: socket.request.user._doc.username,
-        avatar: socket.request.user._doc.avatar,
+        id: socket.request.user._doc._id
       };
 
       // emit notification
       if(clients[data.contactId]){
-        emitNotifyToArray(clients,data.contactId,io,'response-add-new-contact',currentUser);
+        emitNotifyToArray(clients,data.contactId,io,'response-remove-request-contact',currentUser);
       }
     });
 
     socket.on("disconnect",() =>{
       clients = removeSocketIdFromArray(clients,socket.request.user._doc._id,socket);
     });
-
   });
 };
 
-module.exports = addNewContact;
+module.exports = removeRequestContact;

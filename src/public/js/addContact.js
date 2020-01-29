@@ -1,16 +1,3 @@
-function increaseNumberNotiContact(calssName){
-  let currentValue = +$('.' + className).find("em").text();
-  currentValue += 1;
-
-  if(currentValue === 0){
-    $('.' + className).html('')
-  }
-  else {
-    $('.' + className).html('(<em>'+ currentValue +'</em>)');
-  }
-}
-
-
 
 function addContact() {
   $('.user-add-new-contact').bind('click', function(){
@@ -19,11 +6,19 @@ function addContact() {
       if(data.success){
         $("#find-user").find('div.user-add-new-contact[data-uid = ' + targetId + "]").hide();
         $("#find-user").find('div.user-remove-request-contact[data-uid = ' + targetId + "]" ).css("display","inline-block");
-        className = "count-request-contact-sent";
-        increaseNumberNotiContact(className);
+       
+        increaseNumberNotiContact( className = "count-request-contact-sent");
         socket.emit("add-new-contact",{contactId: targetId});
       }
     })
   })
 }
 
+socket.on("response-add-new-contact",function(user){
+  let notif = '<span data-uid="'+ user.id +'"><img class="avatar-small" src="images/users/'+ user.avatar +'" alt=""> <strong>'+ user.username +'</strong> đã gửi cho bạn một lời mời kết bạn!</span><br><br><br>';
+  console.log(notif);
+  $(".noti_content").prepend(notif);
+  increaseNumberNotiContact(className = "count-request-contact-received");
+  increaseNumberNotification(className = "noti_contact_counter");
+  increaseNumberNotification(className = "noti_counter");
+});
