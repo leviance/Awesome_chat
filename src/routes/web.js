@@ -1,5 +1,5 @@
 import express from 'express';
-import {home,auth,user,contact} from '../controllers/index';
+import {home,auth,user,contact, notification} from '../controllers/index';
 import validator from '../validation/authValidation';
 import userValid from '../validation/userValidation';
 import contactValid from '../validation/contactValidation';
@@ -47,6 +47,8 @@ let initRoutes = (app) =>{
   router.get('/contact/find-users/:keyWord',auth.checkLoggedIn, contactValid.findUserContact , contact.finndUsersContact);
   router.post('/contact/add-new',auth.checkLoggedIn, contact.addNew);
   router.delete('/contact/remove-request-contact',auth.checkLoggedIn, contact.removeRequestContact);
+
+  router.get('/notification/read-more/:skipNumber',auth.checkLoggedIn ,notification.readMore);
   return app.use('/',router);
 
 }
