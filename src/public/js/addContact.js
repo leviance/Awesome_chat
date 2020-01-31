@@ -21,6 +21,6 @@ socket.on("response-add-new-contact",function(user){
 
 
   increaseNumberNotiContact(className = "count-request-contact-received");
-  increaseNumberNotification(className = "noti_contact_counter");
-  increaseNumberNotification(className = "noti_counter");
+  increaseNumberNotification(className = "noti_contact_counter",1);
+  increaseNumberNotification(className = "noti_counter",1);
 });
