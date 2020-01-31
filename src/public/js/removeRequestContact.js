@@ -24,6 +24,6 @@ socket.on("response-remove-request-contact",function(user){
   // xoa o modal tab yeu cau ket ban
 
   decreaseNumberNotiContact(className = "count-request-contact-received");
-  decreaseNumberNotification(className = "noti_contact_counter");
-  decreaseNumberNotification(className = "noti_counter");
+  decreaseNumberNotification(className = "noti_contact_counter" ,1);
+  decreaseNumberNotification(className = "noti_counter",1);
 });
