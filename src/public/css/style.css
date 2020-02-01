@@ -1317,12 +1317,12 @@ label:focus,
   cursor: pointer;
 }
 
-.mark-notif-as-read,.read-more-notif{
+.mark-notif-as-read,.read-more-notif,.read-more-contacts-received,.read-more-contacts-sent,.read-more-contacts{
   height: 30px;
   text-align: center;
 }
 
-.mark-notif-as-read >a, .read-more-notif >a{
+.mark-notif-as-read >a, .read-more-notif >a,.read-more-contacts-received>a,.read-more-contacts-sent>a,.read-more-contacts>a{
   text-decoration: none;
 }
-.read-more-notif{ padding-top: 20px;}
+.read-more-notif,.read-more-contacts-received,.read-more-contacts-sent,.read-more-contacts{ padding-top: 20px;}
