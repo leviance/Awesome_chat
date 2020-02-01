@@ -13,6 +13,7 @@ let addNewContact = (io) =>{
         id: socket.request.user._doc._id,
         username: socket.request.user._doc.username,
         avatar: socket.request.user._doc.avatar,
+        address: (socket.request.user._doc.address !== null) ? socket.request.user._doc.address : ""
       };
 
       // emit notification
