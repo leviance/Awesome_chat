@@ -47,7 +47,10 @@ let initRoutes = (app) =>{
   router.get('/contact/find-users/:keyWord',auth.checkLoggedIn, contactValid.findUserContact , contact.finndUsersContact);
   router.post('/contact/add-new',auth.checkLoggedIn, contact.addNew);
   router.delete('/contact/remove-request-contact',auth.checkLoggedIn, contact.removeRequestContact);
-
+  router.get('/contact/read-more-contacts/:skipNumber',auth.checkLoggedIn, contact.readMoreContacts);
+  router.get('/contact/read-more-contacts-sent/:skipNumber',auth.checkLoggedIn, contact.readMoreContactsSent);
+  router.get('/contact/read-more-contacts-received/:skipNumber',auth.checkLoggedIn, contact.readMoreContactsReceived);
+  
   router.get('/notification/read-more/:skipNumber',auth.checkLoggedIn ,notification.readMore);
   router.put('/notification/mark-all-as-read',auth.checkLoggedIn ,notification.markAllAsRead);
   

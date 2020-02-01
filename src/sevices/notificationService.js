@@ -15,7 +15,7 @@ let getNotifications  =  (currentUserId) => {
       // end convert notifications sang dang du lieu nhu trong vd
       
       let getNotifContents = notificationsArr.map( async (notification) =>{
-        let sender = await UserModel.findUserById(notification.senderId); 
+        let sender = await UserModel.getNormalUserDataById(notification.senderId); 
         return NotificationModel.contents.getContent(notification.type,notification.isRead,sender._id,sender.username, sender.avatar);
       });
       resolve(await Promise.all(getNotifContents));
@@ -48,7 +48,7 @@ let readMore  =  (currentUserId,skipNumberNotification) => {
       // 
       
       let getNotifContents = newNotifications.map( async (notification) =>{
-        let sender = await UserModel.findUserById(notification.senderId); 
+        let sender = await UserModel.getNormalUserDataById(notification.senderId); 
         return NotificationModel.contents.getContent(notification.type,notification.isRead,sender._id,sender.username, sender.avatar);
       });
       resolve(await Promise.all(getNotifContents));
@@ -56,7 +56,7 @@ let readMore  =  (currentUserId,skipNumberNotification) => {
     } catch (error) {
       reject(error);
     }
-  })
+  });
 };
 
 let markAllAsRead  =  (currentUserId,targetUsers) => {
