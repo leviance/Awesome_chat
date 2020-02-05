@@ -1,5 +1,5 @@
 
-function decreaseNumberNotiContact(calssName){
+function decreaseNumberNotiContact(className){
   let currentValue = +$('.' + className).find("em").text();
   currentValue -= 1;
 
@@ -11,7 +11,7 @@ function decreaseNumberNotiContact(calssName){
   }
 }
 
-function increaseNumberNotiContact(calssName){
+function increaseNumberNotiContact(className){
   let currentValue = +$('.' + className).find("em").text();
   currentValue += 1;
 

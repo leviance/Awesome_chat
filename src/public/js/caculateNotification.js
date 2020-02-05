@@ -1,5 +1,5 @@
 
-function decreaseNumberNotification(calssName,number){
+function decreaseNumberNotification(className,number){
   let currentValue = +$('.' + className).text();
   currentValue -= number;
 
@@ -11,7 +11,7 @@ function decreaseNumberNotification(calssName,number){
   }
 }
 
-function increaseNumberNotification(calssName,number){
+function increaseNumberNotification(className,number){
   let currentValue = +$('.' + className).text();
   currentValue += number;
 

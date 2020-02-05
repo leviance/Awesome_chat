@@ -41,7 +41,8 @@ contactSchema.statics = {
     return this.remove({
       $and: [
         {"userId": userId},
-        {"contactId" : contactId}
+        {"contactId" : contactId},
+        {"status": false}
       ]
     }).exec();
   },
@@ -50,9 +51,20 @@ contactSchema.statics = {
     return this.remove({
       $and: [
         {"contactId": userId},
-        {"userId" : contactId}
+        {"userId" : contactId},
+        {"status": false}
       ]
     }).exec();
+  },
+
+  approveRequestContactReceived(userId, contactId){
+    return this.update({
+      $and: [
+        {"contactId": userId},
+        {"userId" : contactId},
+        {"status": false}
+      ]
+    },{"status":true}).exec();
   },
 
   getContacts(userId, limit){
