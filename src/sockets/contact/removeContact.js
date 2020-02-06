@@ -2,19 +2,19 @@ import {pushSocketIdToArray,emitNotifyToArray,removeSocketIdFromArray} from '../
 
 
 // io form socket.io
-let removeRequestContactSent = (io) =>{ 
+let removeContact = (io) =>{ 
   let clients = {};
   io.on('connection',(socket) =>{
     clients = pushSocketIdToArray(clients,socket.request.user._doc._id,socket.id);
 
-    socket.on("remove-request-contact-received",(data) =>{ 
+    socket.on("remove-contact",(data) =>{ 
       let currentUser = {
         id: socket.request.user._doc._id
       };
 
       // emit notification
       if(clients[data.contactId]){
-        emitNotifyToArray(clients,data.contactId,io,'response-remove-request-contact-received',currentUser);
+        emitNotifyToArray(clients,data.contactId,io,'response-remove-contact',currentUser);
       }
     });
 
@@ -24,4 +24,4 @@ let removeRequestContactSent = (io) =>{
   });
 };
 
-module.exports = removeRequestContactSent;
+module.exports = removeContact;

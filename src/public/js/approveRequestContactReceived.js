@@ -2,7 +2,7 @@ function approveRequestContactReceived() {
   $('.user-approve-request-contact-received').unbind('click').on('click', function() {
       let targetId = $(this).data('uid');
       $.ajax({
-          url: "/contact/approve-request-contact-reveived",
+          url: "/contact/approve-request-contact-received",
           type: "put",
           data: {
               uid: targetId
@@ -18,6 +18,9 @@ function approveRequestContactReceived() {
               decreaseNumberNotiContact("count-request-contact-received");
               increaseNumberNotiContact("count-contacts");
               decreaseNumberNotification("noti_contact_counter", 1);
+              removeContact();
+            // sau này làm chức năng chat thì sẽ xóa tiếp user ở phần chat
+
               socket.emit("approve-request-contact-received", {
                   contactId: targetId
               });
@@ -37,6 +40,9 @@ socket.on("response-approve-request-contact-received", function(user) {
   $("#find-user").find(`ul li[data-uid = ${user.id}]`).remove();
   let userInfoHtml = `<li class="_contactList" data-uid="${user.id}"><div class="contactPanel"><div class="user-avatar"><img src="images/users/${user.avatar}" alt=""></div><div class="user-name"><p>${user.username}</p></div><br><div class="user-address"><span>&nbsp ${user.address}</span></div><div class="user-talk" data-uid="${user.id}">Trò chuyện</div><div class="user-remove-contact action-danger" data-uid="${user.id}">Xóa liên hệ</div></div></li>`;
   $("#contacts").find("ul").prepend(userInfoHtml);
+  removeContact();
+  // sau này làm chức năng chat thì sẽ xóa tiếp user ở phần chat
+
 });
 $(document).ready(function() {
   approveRequestContactReceived();

@@ -14,6 +14,7 @@ contactSchema.statics = {
   createNew(item) {
     return this.create(item);
   },
+
   findAllByUser(userId) {
     return this.find({
       $or : [
@@ -30,11 +31,28 @@ contactSchema.statics = {
           {"contactId" : contactId}
         ]},
         {$and : [
-          {"contactId" : contactId},
-          {"userId": userId}
+          {"userId" : contactId},
+          {"contactId": userId}
         ]}
       ]
     })
+  },
+
+  removeContact(userId,contactId){
+    return this.remove({
+      $or: [
+        {$and: [
+          {"userId": userId},
+          {"contactId" : contactId},
+          {"status": true}
+        ]},
+        {$and : [
+          {"userId" : contactId},
+          {"contactId": userId},
+          {"status": true}
+        ]}
+      ]
+    }).exec();
   },
 
   removeRequestContactSent(userId, contactId){
