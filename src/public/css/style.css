@@ -681,7 +681,7 @@ label:focus,
 }
 
 .left a.create-group-chat {
-  display: none;
+  display: block;
   float: left;
   width: 40px;
   height: 40px;
@@ -1316,15 +1316,15 @@ label:focus,
   cursor: pointer;
 }
 
-.mark-notif-as-read,.read-more-notif,.read-more-contacts-received,.read-more-contacts-sent,.read-more-contacts{
+.mark-notif-as-read,.read-more-notif,.read-more-contacts-received,.read-more-contacts-sent,.read-more-contacts,.read-more-all-chat,.read-more-user-chat,.read-more-group-chat{
   height: 30px;
   text-align: center;
 }
 
-.mark-notif-as-read >a, .read-more-notif >a,.read-more-contacts-received>a,.read-more-contacts-sent>a,.read-more-contacts>a{
+.mark-notif-as-read >a, .read-more-notif >a,.read-more-contacts-received>a,.read-more-contacts-sent>a,.read-more-contacts>a,,.read-more-all-chat>a,.read-more-user-chat>a,.read-more-group-chat>a{
   text-decoration: none;
 }
-.read-more-notif,.read-more-contacts-received,.read-more-contacts-sent,.read-more-contacts{ padding-top: 20px;}
+.read-more-notif,.read-more-contacts-received,.read-more-contacts-sent,.read-more-contacts,,.read-more-all-chat,.read-more-user-chat,.read-more-group-chat{ padding-top: 20px;}
 .display-important{
   display: inline-block !important;
 }
