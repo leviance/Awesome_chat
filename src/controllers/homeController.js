@@ -1,5 +1,5 @@
 import {notification,contact, message} from '../sevices/index';
-import {bufferToBase64} from '../helpers/clientHeper';
+import {bufferToBase64, lastItemOfArr,convertTimestampToHumanTime} from '../helpers/clientHeper';
 
 let homeController = async (req,res) => {
   // only 10 items one time
@@ -44,7 +44,9 @@ let homeController = async (req,res) => {
     userConversations : userConversations,
     groupConversations : groupConversations,
     allConversationWithMessage : allConversationWithMessage,
-    bufferToBase64 : bufferToBase64
+    bufferToBase64 : bufferToBase64,
+    lastItemOfArr : lastItemOfArr,
+    convertTimestampToHumanTime : convertTimestampToHumanTime
   });
 }
 
