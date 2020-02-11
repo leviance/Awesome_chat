@@ -1,4 +1,5 @@
 import {notification,contact, message} from '../sevices/index';
+import {bufferToBase64} from '../helpers/clientHeper';
 
 let homeController = async (req,res) => {
   // only 10 items one time
@@ -25,6 +26,8 @@ let homeController = async (req,res) => {
   let userConversations = getAllConversationItems.userConversations;
   let groupConversations = getAllConversationItems.groupConversations;
 
+  let allConversationWithMessage = getAllConversationItems.allConversationWithMessage;
+
   return res.render('main/home/home',{
     errors: req.flash('errors'),
     success: req.flash('success'),
@@ -39,7 +42,9 @@ let homeController = async (req,res) => {
     countAllContactsReceived : countAllContactsReceived,
     allConversations : allConversations,
     userConversations : userConversations,
-    groupConversations : groupConversations
+    groupConversations : groupConversations,
+    allConversationWithMessage : allConversationWithMessage,
+    bufferToBase64 : bufferToBase64
   });
 }
 

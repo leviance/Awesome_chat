@@ -460,7 +460,7 @@ label:focus,
 }
 
 .active {
-  background-color: #2ECC71;
+  background-color: rgb(255, 255, 255);
   color: #fff;
 }
 
@@ -1113,6 +1113,11 @@ label:focus,
   float: left;
 }
 
+.right .bubble.me img.avatar-small{
+  display: block;
+  margin-left: 20px;
+}
+
 .right .bubble.me a {
   float: left;
   border-bottom: 1.5px solid #c8d6e5;
@@ -1321,10 +1326,15 @@ label:focus,
   text-align: center;
 }
 
-.mark-notif-as-read >a, .read-more-notif >a,.read-more-contacts-received>a,.read-more-contacts-sent>a,.read-more-contacts>a,,.read-more-all-chat>a,.read-more-user-chat>a,.read-more-group-chat>a{
+.mark-notif-as-read >a, .read-more-notif >a,.read-more-contacts-received>a,.read-more-contacts-sent>a,.read-more-contacts>a,.read-more-all-chat>a,.read-more-user-chat>a,.read-more-group-chat>a{
   text-decoration: none;
 }
-.read-more-notif,.read-more-contacts-received,.read-more-contacts-sent,.read-more-contacts,,.read-more-all-chat,.read-more-user-chat,.read-more-group-chat{ padding-top: 20px;}
+.read-more-notif,.read-more-contacts-received,.read-more-contacts-sent,.read-more-contacts,.read-more-all-chat,.read-more-user-chat,.read-more-group-chat{ padding-top: 20px;}
 .display-important{
   display: inline-block !important;
+}
+
+#screen-chat{
+  width: 100%;
+  height: 100%;
 }
