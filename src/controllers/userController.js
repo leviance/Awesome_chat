@@ -40,7 +40,7 @@ let upDateAvatar = (req,res) =>{
         updatedAt : Date.now()
       };
       let userUpdate = await user.updateUser(req.user._id,updateUserItem);
-      await fsExtra.remove(app.avatar_directory + '/' + userUpdate.avatar); 
+      //await fsExtra.remove(app.avatar_directory + '/' + userUpdate.avatar); 
       let result = {
         message : transSuccess.avatar_updated,
         imgageSrc: '/images/users/' + req.file.filename
