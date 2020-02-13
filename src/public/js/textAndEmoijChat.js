@@ -58,6 +58,13 @@ function textAndEmoijChat(divId){
         // emit real time
         socket.emit("chat-text-emoij",dataToEmit);
 
+        // emit remove typing real-time
+        typingOff(divId);
+
+        let check = $(`.chat[data-chat=${divId}]`).find("div.bubble-typing-gif");
+        if(check.length){
+          check.remove();
+        }
       }).fail(function(response){
         alertify.notify(response.responseText,"error",7);
       });

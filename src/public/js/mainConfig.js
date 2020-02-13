@@ -38,6 +38,10 @@ function enableEmojioneArea(divId) {
       },
       click: function(){
         textAndEmoijChat(divId);
+        typingOn(divId);
+      },
+      blur: function(){
+        typingOff(divId);
       }
     },
   });
