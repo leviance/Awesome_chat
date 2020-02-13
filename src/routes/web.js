@@ -1,5 +1,5 @@
 import express from 'express';
-import {home,auth,user,contact, notification} from '../controllers/index';
+import {home,auth,user,contact, notification,message} from '../controllers/index';
 import validator from '../validation/authValidation';
 import userValid from '../validation/userValidation';
 import contactValid from '../validation/contactValidation';
@@ -7,6 +7,7 @@ import passport from 'passport';
 import initPassportLocal from '../controllers/passportController/local';
 import initPassportFacebook from '../controllers/passportController/facebook';
 import initPassportGoogle from '../controllers/passportController/google'; 
+import messageValidation from '../validation/messageValidation';
 
 initPassportLocal();
 initPassportFacebook();
@@ -57,6 +58,8 @@ let initRoutes = (app) =>{
   router.get('/notification/read-more/:skipNumber',auth.checkLoggedIn ,notification.readMore);
   router.put('/notification/mark-all-as-read',auth.checkLoggedIn ,notification.markAllAsRead);
   
+  router.post('/message/add-new-text-emoji',auth.checkLoggedIn,messageValidation.checkMessageLength,message.addNewTextEmoij)
+
   return app.use('/',router);
 
 }
