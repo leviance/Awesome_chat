@@ -1,10 +1,3 @@
-function bufferToBase64(buffer) {
-  return btoa(
-    new Uint8Array(buffer)
-      .reduce((data,byte) => data + String.fromCharCode(byte),'')
-  );
-}
-
 function imageChat(divId){
   $(`#image-chat-${divId}`).unbind("change").on("change",function(){
     let fileData = $(this).prop("files")[0];
@@ -42,7 +35,6 @@ function imageChat(divId){
       processData: false,
       data: messageFormData,
       success: function(data) {
-        console.log(data);
         let dataToEmit = {
           message: data.message,
 
@@ -68,7 +60,7 @@ function imageChat(divId){
         nineScrollRight(divId);
 
         $(`.person[data-chat=${divId}]`).find("span.time").removeClass("message-time-real-time").html(moment(data.message.createdAt).locale("vi").startOf("seconds").fromNow());
-        $(`.person[data-chat=${divId}]`).find("span.preview").html("Hình ảnh");
+        $(`.person[data-chat=${divId}]`).find("span.preview").html("Hình ảnh...");
 
         $(`.person[data-chat=${divId}]`).on("tricker.moveConversationToTheTop",function(){
           let dataToMove = $(this).parent();
