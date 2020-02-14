@@ -170,6 +170,9 @@ function changeScreenChat(){
 
     // Bật emoji, tham số truyền vào là id của box nhập nội dung tin nhắn
     enableEmojioneArea(divId);
+
+    // Bat lang nghe DOM cho vie chat tin nhan hinh anh
+    imageChat(divId);
   });
 }
 

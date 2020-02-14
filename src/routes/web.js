@@ -58,7 +58,8 @@ let initRoutes = (app) =>{
   router.get('/notification/read-more/:skipNumber',auth.checkLoggedIn ,notification.readMore);
   router.put('/notification/mark-all-as-read',auth.checkLoggedIn ,notification.markAllAsRead);
   
-  router.post('/message/add-new-text-emoji',auth.checkLoggedIn,messageValidation.checkMessageLength,message.addNewTextEmoij)
+  router.post('/message/add-new-text-emoji',auth.checkLoggedIn,messageValidation.checkMessageLength,message.addNewTextEmoij);
+  router.post('/message/add-new-message',auth.checkLoggedIn,message.addNewImage);
 
   return app.use('/',router);
 
