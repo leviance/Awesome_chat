@@ -24,6 +24,7 @@ export const transError = {
   conversation_not_found : "Cuộc trò truyện không tồn tại",
   image_message_type : "kiểu file không hợp lệ",
   image_message_size : "file quá lớn để upload tối đa là 10MB",
+  attachment_message_size : "file quá lớn để upload tối đa là 2G",
 };
 
 export const transSuccess = {

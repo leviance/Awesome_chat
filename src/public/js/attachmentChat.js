@@ -1,16 +1,10 @@
-function imageChat(divId){
-  $(`#image-chat-${divId}`).unbind("change").on("change",function(){
+function attachmentChat(divId){
+  $(`#attachment-chat-${divId}`).unbind("change").on("change", function(){
     let fileData = $(this).prop("files")[0];
-    let math = ["image/png","image/jpg","image/jpeg"];
-    let limit = 1048576 * 10;
+    let limit = 1048576 * 2000;
 
-    if($.inArray(fileData.type, math) === -1){
-      alertify.notify("kiểu file không hợp lệ","error", 7);
-      $(this).val(null);
-      return false;
-    }
     if(fileData.size > limit){
-      alertify.notify('Ảnh quá lớn để upload, tối đa 10MB',"error", 7);
+      alertify.notify('Tệp quá lớn để upload, tối đa 2G',"error", 7);
       $(this).val(null);
       return false;
     }
@@ -19,7 +13,7 @@ function imageChat(divId){
     let isChatGroup = false;
 
     let messageFormData = new FormData();
-    messageFormData.append("my-image-chat",fileData);
+    messageFormData.append("my-attachment-chat",fileData);
     messageFormData.append("uid",targetId);
 
     if($(this).hasClass('chat-in-group')){
@@ -28,7 +22,7 @@ function imageChat(divId){
     }
 
     $.ajax({
-      url: "/message/add-new-message",
+      url: "/message/add-new-attachment",
       type: "post",
       cache: false,
       contentType: false,
@@ -37,22 +31,22 @@ function imageChat(divId){
       success: function(data) {
         let dataToEmit = {
           message: data.message,
-
         };
 
-        let messageOfMe = $(`<div class="bubble me bubble-image-file" data-mess-id="${data.message._id}"></div>`);
-        let imageChat = `
-          <img src="data:${data.message.file.contentType}; base64 , ${bufferToBase64(data.message.file.data.data)}" class="show-image-chat">
-        `;
+        let messageOfMe = $(`<div class="bubble me bubble-attachment-file" data-mess-id="${data.message._id}"></div>`);
+        let attachmentChat = `
+        <a href="data:${data.message.file.contentType}; base64 , ${bufferToBase64(data.message.file.data.data)}" download="${data.message.file.fileName}">
+           ${data.message.file.fileName}
+        </a>`;
 
         if(isChatGroup){
           let senderAvatar = `<img src="/images/users/${data.message.sender.avatar}" alt="" class="avatar-small" title="${data.message.sender.name}">`;
-          messageOfMe.html(`${senderAvatar} ${imageChat}`);
+          messageOfMe.html(`${senderAvatar} ${attachmentChat}`);
           increaseNumberMessageGroup(divId);
           dataToEmit.groupId = targetId;
         }
         else{
-          messageOfMe.html(imageChat); 
+          messageOfMe.html(attachmentChat); 
           dataToEmit.contactId = targetId;  
         }
 
@@ -60,7 +54,7 @@ function imageChat(divId){
         nineScrollRight(divId);
 
         $(`.person[data-chat=${divId}]`).find("span.time").removeClass("message-time-real-time").html(moment(data.message.createdAt).locale("vi").startOf("seconds").fromNow());
-        $(`.person[data-chat=${divId}]`).find("span.preview").html("Hình ảnh...");
+        $(`.person[data-chat=${divId}]`).find("span.preview").html("Tệp đính kèm...");
 
         $(`.person[data-chat=${divId}]`).on("tricker.moveConversationToTheTop",function(){
           let dataToMove = $(this).parent();
@@ -69,10 +63,15 @@ function imageChat(divId){
         });
         $(`.person[data-chat=${divId}]`).trigger("tricker.moveConversationToTheTop");
 
-        socket.emit("chat-image",dataToEmit);
+        socket.emit("chat-attachment",dataToEmit);
 
-        let imageChatToAddModal =  `<img src="data:${data.message.file.contentType}; base64 , ${bufferToBase64(data.message.file.data.data)}">`;
-        $(`#imagesModal_${divId}`).find("div.all-images").append(imageChatToAddModal);
+        let attachmentChatToAddModal =  `
+        <li>
+            <a href="data:${data.message.file.contentType}; base64 , ${bufferToBase64(data.message.file.data.data)}" download="${data.message.file.fileName}">
+            ${data.message.file.fileName}
+            </a>
+        </li>`;
+        $(`#attachmentsModal_${divId}`).find("ul.list-attachments").append(attachmentChatToAddModal);
       },
       error: function(error) {
         alertify.notify(error.responseText,"error",7)
@@ -82,23 +81,24 @@ function imageChat(divId){
 }
 
 $(document).ready(function(){
-  socket.on("response-chat-image",function(response){
+  socket.on("response-chat-attachment",function(response){
     let divId = "";
 
     // step 01: handle message data before show
-    let messageOfYou = $(`<div class="bubble you bubble-image-file" data-mess-id="${response.message._id}"></div>`);
-    let imageChat = `
-          <img src="data:${response.message.file.contentType}; base64 , ${bufferToBase64(response.message.file.data.data)}" class="show-image-chat">
-        `;
+    let messageOfYou = $(`<div class="bubble you bubble-attachment-file" data-mess-id="${response.message._id}"></div>`);
+    let attachmentChat = `
+    <a href="data:${response.message.file.contentType}; base64 , ${bufferToBase64(response.message.file.data.data)}" download="${response.message.file.fileName}">
+        ${response.message.file.fileName}
+    </a>`;
 
     if(response.currentGroupId){
       let senderAvatar = `<img src="/images/users/${response.message.sender.avatar}" alt="" class="avatar-small" title="${response.message.sender.name}">`;
-      messageOfYou.html(`${senderAvatar} ${imageChat}`);
+      messageOfYou.html(`${senderAvatar} ${attachmentChat}`);
 
       divId = response.currentGroupId;
     }
     else{
-      messageOfYou.html(imageChat);  
+      messageOfYou.html(attachmentChat);  
       divId = response.currentUserId;
     }
 
@@ -114,7 +114,7 @@ $(document).ready(function(){
 
     // step 04 : change data preview and time in leftside 
     $(`.person[data-chat=${divId}]`).find("span.time").html(moment(response.message.createdAt).locale("vi").startOf("seconds").fromNow());
-    $(`.person[data-chat=${divId}]`).find("span.preview").html("Hình ảnh ...");
+    $(`.person[data-chat=${divId}]`).find("span.preview").html("Tệp đính kèm...");
 
     // step 05 : move conversation to top
     $(`.person[data-chat=${divId}]`).on("tricker.moveConversationToTheTop",function(){
@@ -125,8 +125,14 @@ $(document).ready(function(){
     $(`.person[data-chat=${divId}]`).trigger("tricker.moveConversationToTheTop");
 
     if(response.currentUserId !== $("#dropdown-navbar-user").data("uid")){
-    let imageChatToAddModal =  `<img src="data:${response.message.file.contentType}; base64 , ${bufferToBase64(response.message.file.data.data)}">`;
-    $(`#imagesModal_${divId}`).find("div.all-images").append(imageChatToAddModal);
-    }
-  })
-});
+      let attachmentChatToAddModal =  `
+        <li>
+            <a href="data:${response.message.file.contentType}; base64 , ${bufferToBase64(response.message.file.data.data)}" download="${response.message.file.fileName}">
+            ${response.message.file.fileName}
+            </a>
+        </li>`;
+        
+        $(`#attachmentsModal_${divId}`).find("ul.list-attachments").append(attachmentChatToAddModal);
+      }
+  });
+})
