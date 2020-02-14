@@ -38,6 +38,7 @@ function updateUerInfo() {
 
       let formData = new FormData();
       formData.append("avatar",fileData);
+      
       userAvatar = formData;
     }
     else{

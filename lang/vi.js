@@ -21,7 +21,9 @@ export const transError = {
   avatar_size : "file quá lớn để upload tối đa là 10MB",
   user_undefined : "Tài khoản không tồn tại",
   user_curent_password_failed : "Mật khẩu hiện tại không chính xác",
-  conversation_not_found : "Cuộc trò truyện không tồn tại"
+  conversation_not_found : "Cuộc trò truyện không tồn tại",
+  image_message_type : "kiểu file không hợp lệ",
+  image_message_size : "file quá lớn để upload tối đa là 10MB",
 };
 
 export const transSuccess = {
