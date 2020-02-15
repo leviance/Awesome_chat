@@ -11,9 +11,11 @@ import socketio from 'socket.io';
 import initSockets from './sockets/index';
 import cookieParser from 'cookie-parser';
 import configSocketIo from './config/socketio';
+import events from 'events';
 
 let app = express();
 
+events.EventEmitter.defaultMaxListeners = 30;
 
 let server = http.createServer(app);
 

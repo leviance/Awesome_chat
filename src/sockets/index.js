@@ -8,6 +8,7 @@ import typingOn from "./chat/typingOn";
 import typingOff from "./chat/typingOff";
 import chatImage from "./chat/chatImage";
 import chatAttachment from "./chat/chatAttachment";
+import chatVideo from "./chat/chatVideo";
 
 let initSockets = (io) =>{ 
   addNewContact(io);
@@ -20,6 +21,7 @@ let initSockets = (io) =>{
   typingOff(io);
   chatImage(io);
   chatAttachment(io);
+  chatVideo(io);
 }
 
 module.exports = initSockets;

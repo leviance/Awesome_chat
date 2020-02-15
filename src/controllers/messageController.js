@@ -104,6 +104,7 @@ let attachmentMessageUploadFile = multer({
 }).single("my-attachment-chat");
 
 let addNewAttachment = (req,res) => {
+  
   attachmentMessageUploadFile(req,res, async (error) =>{
     if(error){
       if(error.message) {
