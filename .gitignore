@@ -108,3 +108,5 @@ sh/env.sh
 src/public/bower_components
 
 src/public/emojione
+
+src/public/images/chat/message
