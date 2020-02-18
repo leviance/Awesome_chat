@@ -190,7 +190,20 @@ contactSchema.statics = {
     },{
       "updatedAt" : Date.now()
     }).exec();
+  },
+
+  getFriends(userId){
+    return this.find({
+      $and: [
+        {$or:[
+          {"userId": userId},
+          {"contactId": userId}
+        ]},
+        {"status": true}
+      ]
+    }).sort({"updatedAt": -1}).exec();
   }
-}
+
+};
 
 module.exports = mongoose.model('contact',contactSchema);

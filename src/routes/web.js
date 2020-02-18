@@ -1,5 +1,5 @@
 import express from 'express';
-import {home,auth,user,contact, notification,message} from '../controllers/index';
+import {home,auth,user,contact, notification,message,groupChat} from '../controllers/index';
 import validator from '../validation/authValidation';
 import userValid from '../validation/userValidation';
 import contactValid from '../validation/contactValidation';
@@ -8,6 +8,7 @@ import initPassportLocal from '../controllers/passportController/local';
 import initPassportFacebook from '../controllers/passportController/facebook';
 import initPassportGoogle from '../controllers/passportController/google'; 
 import messageValidation from '../validation/messageValidation';
+import groupChatValidation from '../validation/groupChatValidation';
 
 initPassportLocal();
 initPassportFacebook();
@@ -61,6 +62,10 @@ let initRoutes = (app) =>{
   router.post('/message/add-new-text-emoji',auth.checkLoggedIn,messageValidation.checkMessageLength,message.addNewTextEmoij);
   router.post('/message/add-new-message',auth.checkLoggedIn,message.addNewImage);
   router.post('/message/add-new-attachment',auth.checkLoggedIn,message.addNewAttachment);
+
+  router.get('/contact/search-friends/:keyword',auth.checkLoggedIn, contactValid.searchFriends , contact.searchFriends);
+
+  router.post('/group-chat/add-new',auth.checkLoggedIn, groupChatValidation.addNewGroup, groupChat.addNewGroup);
 
   return app.use('/',router);
 
