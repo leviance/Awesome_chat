@@ -81,6 +81,20 @@ usreSchema.statics = {
   },
   getNormalUserDataById(id) {
     return this.findById(id,{_id : 1, username : 1 , address : 1, avatar : 1}).exec();
+  },
+  findAllToAddGroupChat(friendIds, keyWord) {
+    return this.find({
+      $and: [
+        {"_id" : {$in: friendIds}},
+        {"local.isActive": true},
+        {$or: [
+          {"username": {"$regex" : new RegExp(keyWord,"i")}},
+          {"local.email": {"$regex" : new RegExp(keyWord,"i")}},
+          {"facebook.email": {"$regex" : new RegExp(keyWord,"i")}},
+          {"google.email": {"$regex" : new RegExp(keyWord,"i")}}
+        ]}
+      ]
+    },{_id : 1, username : 1 , address : 1, avatar : 1}).exec();
   }
 };
 

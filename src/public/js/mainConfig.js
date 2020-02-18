@@ -138,17 +138,6 @@ function addFriendsToGroup() {
   });
 }
 
-function cancelCreateGroup() {
-  $('#cancel-group-chat').bind('click', function() {
-    $('#groupChatModal .list-user-added').hide();
-    if ($('ul#friends-added>li').length) {
-      $('ul#friends-added>li').each(function(index) {
-        $(this).remove();
-      });
-    }
-  });
-}
-
 function changeTypetChat(){
   $("#select-type-chat").bind('change', function(){
     let optionSelected = $("option:selected",this);
@@ -212,12 +201,6 @@ $(document).ready(function() {
   // Hiển thị hình ảnh grid slide trong modal tất cả ảnh, tham số truyền vào là số ảnh được hiển thị trên 1 hàng.
   // Tham số chỉ được phép trong khoảng từ 1 đến 5
   gridPhotos(5);
-
-  // Thêm người dùng vào danh sách liệt kê trước khi tạo nhóm trò chuyện
-  addFriendsToGroup();
-
-  // Action hủy việc tạo nhóm trò chuyện
-  cancelCreateGroup();
 
   // thay doi kieu tro chuyện
   changeTypetChat();

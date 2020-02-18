@@ -3,8 +3,8 @@ let Schema = mongoose.Schema;
 
 let chatGroupSchema = new Schema({
   name : String,
-  usreAmount : {type : Number , min : 3 , max : 100},
-  messageAMount : {type : Number , default : 0},
+  userAmount : {type : Number , min : 3 , max : 100},
+  messageAmount : {type : Number , default : 0},
   userId : String,
   members : [
     {userId : String}
@@ -15,6 +15,9 @@ let chatGroupSchema = new Schema({
 });
 
 chatGroupSchema.statics = {
+  createNew(item){
+    return this.create(item);
+  },
   getChatGroups(userId,limit) {
     return this.find({
       "members" : {$elemMatch : {"userId" : userId}}
