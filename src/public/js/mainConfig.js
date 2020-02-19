@@ -10,6 +10,10 @@ function nineScrollLeft() {
   });
 }
 
+function resizeNineScrollLeft(){
+  $(".left").getNiceScroll().resize();
+}
+
 function nineScrollRight(divId) {
   $(`.right .chat[data-chat = ${divId}]`).niceScroll({
     smoothscroll: true,
@@ -184,6 +188,14 @@ function bufferToBase64(buffer) {
   );
 }
 
+function convertEmoji(){
+  $(".convert-emoji").each(function() {
+    var original = $(this).html();
+    var converted = joypixels.toImage(original);
+    $(this).html(converted);
+  });
+};
+
 
 $(document).ready(function() {
   // Hide số thông báo trên đầu icon mở modal contact
@@ -211,13 +223,7 @@ $(document).ready(function() {
   // click vao phan tu dau tien cua cuoc tro truyen khi load 
   $("ul.people").find("a")[0].click();
 
-  $(document).ready(function() {
-    $(".convert-emoji").each(function() {
-        var original = $(this).html();
-        var converted = joypixels.toImage(original);
-        $(this).html(converted);
-    });
-  });
+  convertEmoji();
 
   $("#video-chat-group").bind("click", function(){
     alertify.notify("Tính này này chưa sẵn sàng với nhóm trò chuyện :D","error",7);
