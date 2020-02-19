@@ -287,11 +287,77 @@ let addNewAttachment = (sender,receiverId,messageVal,isChatGroup) =>{
   });
 };
 
+let readMoreAllChat = (currentUserId,skipPersonal,skipGroup) => {
+  return new Promise( async(resolve, reject) =>{
+    try {
+      let contacts = await ContactModel.readMoreContacts(currentUserId,skipPersonal,LIMIT_CONVERSATIONS_TAKEN);
+
+      let userConversationsPromise = contacts.map( async (contact) =>{
+        if(contact.contactId == currentUserId){
+          let getUserContact = await UserModel.getNormalUserDataById(contact.userId);
+          getUserContact.updatedAt = contact.updatedAt;
+          return getUserContact;
+        } else {
+          let getUserContact = await UserModel.getNormalUserDataById(contact.contactId);
+          getUserContact.updatedAt = contact.updatedAt;
+          return getUserContact;
+        }        
+      });
+      // convert data 
+      let userConversationsArr = await Promise.all(userConversationsPromise);
+      let groupConversationsArr = await ChatGroupModel.readMoreChatGroups(currentUserId,skipGroup,LIMIT_CONVERSATIONS_TAKEN );
+
+      let userConversations = [];
+      let groupConversations = [];
+
+      userConversationsArr.forEach(data => {
+        userConversations.push(data._doc);
+      })
+
+      groupConversationsArr.forEach(data => {
+        groupConversations.push(data._doc);
+      })
+      // end convert data
+     
+      let allConversations = userConversations.concat(groupConversations);
+
+      allConversations = _.sortBy(allConversations, (item) =>{ 
+        return -item.updatedAt;
+      });
+
+      let allConversationWithMessagePromise = allConversations.map( async (conversation) =>{
+        //conversation = conversation.toObject();
+        if(conversation.members){
+          let getMessages = await MessageModel.model.getMessagesInGroup(conversation._id,LIMIT_MESSAGES_TAKEN);
+          conversation.messages = _.reverse(getMessages);
+        }
+        else{
+          let getMessages = await MessageModel.model.getMessagesInPersonal(currentUserId,conversation._id,LIMIT_MESSAGES_TAKEN);
+          conversation.messages = _.reverse(getMessages);  
+        }
+        
+        return conversation;
+      });
+
+      let allConversationWithMessage = await Promise.all(allConversationWithMessagePromise);
+
+      allConversationWithMessage = _.sortBy(allConversationWithMessage, (item) =>{ 
+        return -item.updatedAt
+      });
+
+      resolve(allConversationWithMessage);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   getAllConversationItems : getAllConversationItems,
   addNewTextEmoij : addNewTextEmoij,
   addNewImage : addNewImage,
-  addNewAttachment: addNewAttachment
+  addNewAttachment: addNewAttachment,
+  readMoreAllChat: readMoreAllChat
 }
 
 
