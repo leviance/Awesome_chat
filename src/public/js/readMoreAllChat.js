@@ -36,6 +36,9 @@ $(document).ready(function() {
       
       // Step 09 : updata online
       socket.emit("check-status");
+
+      // call read more message
+      readMoreMessages(); 
       
     });
   });
