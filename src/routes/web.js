@@ -65,6 +65,7 @@ let initRoutes = (app) =>{
   router.get('/message/read-more-all-chat',auth.checkLoggedIn,message.readMoreAllChat);
 
   router.get('/contact/search-friends/:keyword',auth.checkLoggedIn, contactValid.searchFriends , contact.searchFriends);
+  router.get('/message/read-more',auth.checkLoggedIn, message.readMore);
 
   router.post('/group-chat/add-new',auth.checkLoggedIn, groupChatValidation.addNewGroup, groupChat.addNewGroup);
 

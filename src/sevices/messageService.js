@@ -352,12 +352,34 @@ let readMoreAllChat = (currentUserId,skipPersonal,skipGroup) => {
   });
 };
 
+let readMore = (currentUserId,skipMessage,targetId,chatInGroup) => {
+  return new Promise( async(resolve, reject) =>{
+    try {
+      if(chatInGroup){
+        let getMessages = await MessageModel.model.readMoreMessagesInGroup(targetId,skipMessage,LIMIT_MESSAGES_TAKEN);
+        getMessages = _.reverse(getMessages);
+
+        return resolve(getMessages);
+      }
+      
+        let getMessages = await MessageModel.model.readMoreMessagesInPersonal(currentUserId,targetId,skipMessage,LIMIT_MESSAGES_TAKEN);
+        getMessages = _.reverse(getMessages);  
+
+        return resolve(getMessages);
+      
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   getAllConversationItems : getAllConversationItems,
   addNewTextEmoij : addNewTextEmoij,
   addNewImage : addNewImage,
   addNewAttachment: addNewAttachment,
-  readMoreAllChat: readMoreAllChat
+  readMoreAllChat: readMoreAllChat,
+  readMore : readMore
 }
 
 
