@@ -221,7 +221,15 @@ $(document).ready(function() {
   changeScreenChat();
 
   // click vao phan tu dau tien cua cuoc tro truyen khi load 
-  $("ul.people").find("a")[0].click();
+  if($("ul.people").find("a").length){
+    $("ul.people").find("a")[0].click();
+  }
+  else{
+    alert("Bạn chưa có bạn bè nào hãy tìm cho mình một người bạn !");
+  }
+
+  // nếu chưa có bạn bè gửi về thông báo
+
 
   convertEmoji();
 
