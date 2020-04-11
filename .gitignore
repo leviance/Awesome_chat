@@ -103,7 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-sh/env.sh
 
 src/public/bower_components
 

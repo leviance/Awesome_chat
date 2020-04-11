@@ -56,10 +56,7 @@ usreSchema.statics = {
   findByFacebookUid(uid) {
     return this.findOne({"facebook.uid" : uid}).exec();
   },
-  findByGoogleUid(uid) {
-    return this.findOne({"google.uid" : uid}).exec();
-  },
-  updateUser(id,item) {
+  findByGoogleUid(uid) {this.update
     return this.findByIdAndUpdate(id,item).exec();
   },
   updatePassword(id,hashedPassword) {
