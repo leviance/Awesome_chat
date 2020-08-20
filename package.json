@@ -19,7 +19,7 @@
   "homepage": "https://github.com/drdung1999/Awesome_chat#readme",
   "dependencies": {
     "babel-node": "0.0.1-security",
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.2",
     "connect-flash": "^0.1.1",
